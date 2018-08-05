@@ -1,7 +1,4 @@
 
-# Xash Projects
-jni/src/Xash3D
-
 # Build data
 libs/armeabi*
 libs/x86
