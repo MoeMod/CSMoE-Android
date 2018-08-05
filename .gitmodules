@@ -1,0 +1,6 @@
+[submodule "jni/src/NanoGL/nanogl"]
+	path = jni/src/NanoGL/nanogl
+	url = https://github.com/FWGS/nanogl
+[submodule "jni/src/Xash3D/xash3d"]
+	path = jni/src/Xash3D/xash3d
+	url = https://github.com/MoeMod/CSBTE-Mobile
