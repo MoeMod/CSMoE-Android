@@ -472,7 +472,7 @@ public class XashActivity extends Activity {
 				
 		String argv       = FWGSLib.getStringExtraFromIntent( intent, "argv", mPref.getString( "argv", "-dev 3 -log" ) );
 		String gamelibdir = FWGSLib.getStringExtraFromIntent( intent, "gamelibdir", enginedir );
-		String gamedir    = FWGSLib.getStringExtraFromIntent( intent, "gamedir", "cstrike" );
+		String gamedir    = FWGSLib.getStringExtraFromIntent( intent, "gamedir", "csbtem" );
 		String basedir    = FWGSLib.getStringExtraFromIntent( intent, "basedir", mPref.getString( "basedir", "/sdcard/xash/" ) );
 		String gdbsafe    = intent.getStringExtra( "gdbsafe" );
 		
