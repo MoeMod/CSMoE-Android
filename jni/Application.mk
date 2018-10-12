@@ -1,7 +1,7 @@
 
 # Uncomment this if you're using STL in your project
 # See CPLUSPLUS-SUPPORT.html in the NDK documentation for more information
-#APP_STL := stlport_static 
+APP_STL := gnustl_static 
 
 XASH_SDL ?= 0
 ifeq ($(XASH_SDL),1)
@@ -14,7 +14,6 @@ APP_CFLAGS += -Wl,--no-undefined
 
 # if non-zero, works only if single ABI selected
 XASH_THREAD_NUM ?= 0
-
 
 CFLAGS_OPT :=  -O3 -fomit-frame-pointer -funsafe-math-optimizations -ftree-vectorize -fgraphite-identity -floop-interchange -funsafe-loop-optimizations -finline-limit=256 -pipe
 CFLAGS_OPT_ARM := -mthumb -mfpu=neon -mcpu=cortex-a9 -pipe -mvectorize-with-neon-quad -DVECTORIZE_SINCOS -fPIC -DHAVE_EFFICIENT_UNALIGNED_ACCESS
@@ -40,7 +39,6 @@ APP_ABI := x86 armeabi armeabi-v7a
 # Build both armeabi-v7a-hard and armeabi-v7a supported only for mods, not for engine
 
 APP_MODULES := xash menu client server NanoGL gpgs_support
-APP_STL := gnustl_static
 ifeq ($(GOOGLE_PLAY_BUILD),1)
 	APP_STL := gnustl_static
 	APP_MODULES += libgpg-1
