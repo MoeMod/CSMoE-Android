@@ -1,0 +1,78 @@
+
+cmake_minimum_required(VERSION  2.8.0)
+
+if (APPLE)
+set (CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -march=native -Wall -Wextra -Wpedantic -Wno-unused-parameter -ggdb")
+set (CMAKE_C_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -ggdb")
+set (CMAKE_C_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE}  -O3")
+set (CMAKE_C_FLAGS_MINSIZEREL "${CMAKE_CXX_FLAGS_MINSIZEREL} -Os")
+set (CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} -ggdb -O3")
+elseif(MSVC)
+set (CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} ")
+set (CMAKE_C_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Od")
+set (CMAKE_C_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Ox")
+set (CMAKE_C_FLAGS_MINSIZEREL "${CMAKE_CXX_FLAGS_MINSIZEREL} -O1")
+set (CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} -O1")
+else()
+set (CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -march=native -Wall -Wextra -Wpedantic -Wno-unused-parameter -Wl,--no-undefined -ggdb")
+set (CMAKE_C_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -ggdb")
+set (CMAKE_C_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE}  -O3")
+set (CMAKE_C_FLAGS_MINSIZEREL "${CMAKE_CXX_FLAGS_MINSIZEREL} -Os")
+set (CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} -ggdb -O3")
+endif()
+
+# force build 32bit libraries
+if(CMAKE_SIZEOF_VOID_P MATCHES "8")
+    if(NOT APPLE)
+        SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -m32")
+        SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m32")
+    endif()
+endif()
+
+# force xp build
+if(MSVC)
+	add_definitions(-D_USING_V110_SDK71_)
+endif()
+
+if(APPLE)
+	add_definitions(-DHAVE_STDINT_H)
+endif()
+
+if(64BIT AND CMAKE_SIZEOF_VOID_P EQUAL 4)
+	message(FATAL_ERROR "You enabled XASH_64BIT, but compiler can't create 64 bit code!")
+endif()
+
+if(64BIT)
+	message(STATUS "Building for 64 Bit")
+else()
+	message(STATUS "Building for 32 Bit")
+endif()
+
+if(NOT ${CMAKE_INSTALL_PREFIX})
+	if(WIN32)
+		set (CMAKE_INSTALL_PREFIX "D:\\CSBTE-Mobile")
+	else()
+		set (CMAKE_INSTALL_PREFIX "~/CSBTE-Mobile")
+	endif()
+endif()
+
+
+set(XASH_BUILD_COMMIT "${CMAKE_BUILD_POSTFIX}")
+set(SDL_SHARED true)
+set(XASH_LIBDL true)
+
+ADD_SUBDIRECTORY(game_launch)
+ADD_SUBDIRECTORY(SDL2)
+ADD_SUBDIRECTORY(engine)
+ADD_SUBDIRECTORY(dlls)
+ADD_SUBDIRECTORY(cl_dll)
+ADD_SUBDIRECTORY(mainui)
+
+#install( TARGETS ${XASH_ENGINE} RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX})
+#				install( FILES ${SDL2_DLL} DESTINATION ${CMAKE_INSTALL_PREFIX})
+
+#install( TARGETS ${CLDLL_LIBRARY} RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/cstrike/cl_dlls )
+#install( TARGETS ${SERVER_LIBRARY} RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/cstrike/dlls)
+
+#install( TARGETS ${MAINUI_LIBRARY} RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/cstrike/cl_dlls )
+#install( TARGETS ${XASH_LAUNCHER} RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX} )

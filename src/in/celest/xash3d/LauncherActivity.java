@@ -12,7 +12,7 @@ import android.text.style.*;
 import android.util.*;
 import android.view.*;
 import android.widget.*;
-import in.celest.xash3d.hl.*;
+import in.celest.xash3d.csbtem.*;
 import java.io.*;
 import java.net.*;
 import org.json.*;
@@ -28,7 +28,7 @@ public class LauncherActivity extends Activity
 	
 	static EditText cmdArgs, resPath, writePath, resScale, resWidth, resHeight;
 	static ToggleButton useVolume, resizeWorkaround, useRoDir;
-	static CheckBox	checkUpdates, immersiveMode, useRoDirAuto;
+	static CheckBox	immersiveMode, useRoDirAuto;
 	static TextView tvResPath, resResult;
 	static RadioButton radioScale, radioCustom;
 	static RadioGroup scaleGroup;
@@ -132,7 +132,6 @@ public class LauncherActivity extends Activity
 		cmdArgs      = (EditText) findViewById(R.id.cmdArgs);
 		useVolume    = (ToggleButton) findViewById( R.id.useVolume );
 		resPath      = (EditText) findViewById( R.id.cmd_path );
-		checkUpdates = (CheckBox)findViewById( R.id.check_updates );
 		//updateToBeta = (CheckBox)findViewById( R.id.check_betas );
 		pixelSpinner = (Spinner) findViewById( R.id.pixelSpinner );
 		resizeWorkaround = (ToggleButton) findViewById( R.id.enableResizeWorkaround );
@@ -196,7 +195,6 @@ public class LauncherActivity extends Activity
 			}
 		});
 		useVolume.setChecked(mPref.getBoolean("usevolume",true));
-		checkUpdates.setChecked(mPref.getBoolean("check_updates",true));
 		//updateToBeta.setChecked(mPref.getBoolean("check_betas", false));
 		updatePath(mPref.getString("basedir", FWGSLib.getDefaultXashPath() ) );
 		cmdArgs.setText(mPref.getString("argv","-dev 3 -log"));
@@ -306,8 +304,6 @@ public class LauncherActivity extends Activity
 		hideRodirSettings( !useRoDir.isChecked() );
 		updateResolutionResult();
 		toggleResolutionFields();
-		if( !mPref.getBoolean("successfulRun",false) )
-			showFirstRun();
 	}
 	
 	@Override
@@ -408,7 +404,6 @@ public class LauncherActivity extends Activity
 		editor.putString("basedir", resPath.getText().toString());
 		editor.putInt("pixelformat", pixelSpinner.getSelectedItemPosition());
 		editor.putBoolean("enableResizeWorkaround",resizeWorkaround.isChecked());
-		editor.putBoolean("check_updates", checkUpdates.isChecked());
 		editor.putBoolean("resolution_fixed", resolution.isChecked());
 		editor.putBoolean("resolution_custom", radioCustom.isChecked());
 		editor.putFloat("resolution_scale", getResolutionScale() );
@@ -442,100 +437,9 @@ public class LauncherActivity extends Activity
 	    				dialog.cancel();
 					}
 				});
-				((Button)dialog.findViewById( R.id.show_firstrun )).setOnClickListener(new View.OnClickListener(){
-						@Override
-						public void onClick(View v) {
-							dialog.cancel();
-							Intent intent = new Intent(a, XashTutorialActivity.class);
-							startActivity(intent);
-						}
-					});
 
 			}
 		});
-	}
-
-	int m_iFirstRunCounter = 0;
-	public void showFirstRun()
-	{
-		/*if( m_iFirstRunCounter < 0 )
-			m_iFirstRunCounter = 0;
-		
-		final int titleres = getResources().getIdentifier("page_title" + String.valueOf(m_iFirstRunCounter), "string", getPackageName());
-		final int contentres = getResources().getIdentifier("page_content" + String.valueOf(m_iFirstRunCounter), "string", getPackageName());
-		final Activity a = this;
-		if( titleres == 0 || contentres == 0 )
-			return;
-		this.runOnUiThread(new Runnable() 
-		{
-			public void run()
-			{
-				final TextView content = new TextView(LauncherActivity.this);
-				content.setMovementMethod(LinkMovementMethod.getInstance());
-				AlertDialog.Builder builder = new AlertDialog.Builder(a)
-					.setTitle(titleres)
-					.setView(content);
-				DialogInterface.OnClickListener nextClick = new DialogInterface.OnClickListener()
-				{
-					public void onClick(DialogInterface d, int p1)
-					{
-						m_iFirstRunCounter++;
-						showFirstRun();
-					}
-				};
-				DialogInterface.OnClickListener prevClick = new DialogInterface.OnClickListener()
-				{
-					public void onClick(DialogInterface d, int p1)
-					{
-						m_iFirstRunCounter--;
-						showFirstRun();
-					}
-				};
-				
-				if( sdk >= 21 )
-				{
-					builder.setPositiveButton(R.string.next, nextClick);
-					if( m_iFirstRunCounter > 0 )
-					{
-						builder.setNegativeButton(R.string.prev, prevClick);
-					}
-					builder.setNeutralButton(R.string.skip, null);
-				}
-				else
-				{
-					builder.setNegativeButton(R.string.next, nextClick);
-					if( m_iFirstRunCounter > 0 )
-					{
-						builder.setNeutralButton(R.string.prev, prevClick);
-					}
-					builder.setPositiveButton(R.string.skip, null);
-				}
-				builder.setCancelable(false);
-				final AlertDialog dialog = builder.create();
-				dialog.show();
-				content.setText(Html.fromHtml(getResources().getText(contentres).toString(),
-					new Html.ImageGetter()
-					{
-						@Override
-						public Drawable getDrawable(String source)
-						{
-							int dourceId = getApplicationContext().getResources().getIdentifier(source, "drawable", getPackageName());
-							Drawable drawable = getApplicationContext().getResources().getDrawable(dourceId);
-							final int visibleWidth = dialog.getWindow().getDecorView().getWidth();
-							final int picWidth = drawable.getIntrinsicWidth();
-							final int picHeight = drawable.getIntrinsicHeight();
-							
-							final int calcWidth = visibleWidth < picWidth ? visibleWidth : picWidth;
-							// final int calcHeight = (int)((float)picHeight * ((float)calcWidth / (float)picWidth));
-							final int calcHeight = (int)((float)picHeight);
-							
-							drawable.setBounds( 0, 0, calcWidth, calcHeight);
-							return drawable;
-						}
-					}, null));
-			}
-		});*/
-		startActivity(new Intent(this, in.celest.xash3d.XashTutorialActivity.class));
 	}
 
 	public void selectFolder(View view)

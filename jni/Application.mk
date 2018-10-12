@@ -16,7 +16,7 @@ APP_CFLAGS += -Wl,--no-undefined
 XASH_THREAD_NUM ?= 0
 
 
-CFLAGS_OPT :=  -O3 -fomit-frame-pointer -ggdb -funsafe-math-optimizations -ftree-vectorize -fgraphite-identity -floop-interchange -funsafe-loop-optimizations -finline-limit=256 -pipe
+CFLAGS_OPT :=  -O3 -fomit-frame-pointer -funsafe-math-optimizations -ftree-vectorize -fgraphite-identity -floop-interchange -funsafe-loop-optimizations -finline-limit=256 -pipe
 CFLAGS_OPT_ARM := -mthumb -mfpu=neon -mcpu=cortex-a9 -pipe -mvectorize-with-neon-quad -DVECTORIZE_SINCOS -fPIC -DHAVE_EFFICIENT_UNALIGNED_ACCESS
 #CFLAGS_OPT_ARMv5 :=-mcpu=arm1136jf-s -mtune=arm1136jf-s -mthumb -mfpu=vfp -pipe -mfloat-abi=softfp
 CFLAGS_OPT_ARMv5 := -march=armv5te -mthumb -msoft-float

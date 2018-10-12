@@ -17,8 +17,3 @@ local.properties
 
 # VKontakte gives a shit when uploading APK
 *.bin 
-
-# Generated
-assets/extras.pak
-res/values/git-rev.xml
-src/in/celest/xash3d/XashConfig.java

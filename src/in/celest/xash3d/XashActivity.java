@@ -30,7 +30,7 @@ import java.lang.reflect.*;
 import java.util.List;
 import java.security.MessageDigest;
 
-import in.celest.xash3d.hl.R;
+import in.celest.xash3d.csbtem.R;
 import in.celest.xash3d.XashConfig;
 import in.celest.xash3d.JoystickHandler;
 import android.provider.Settings.Secure;
@@ -396,7 +396,6 @@ public class XashActivity extends Activity {
 			finish();
 			return;
 		}
-		InstallReceiver.extractPAK( this, false );
 
 		// Set up the surface
 		mSurface = new EngineSurface( getApplication() );

@@ -31,7 +31,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import in.celest.xash3d.hl.R;
+import in.celest.xash3d.csbtem.R;
 
 public class FPicker extends Activity {
     private File currentDir;
