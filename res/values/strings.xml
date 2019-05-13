@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name" translatable="false">CSBTE Mobile</string>
-	<string name="launcher_name" translatable="false">CSBTE Mobile</string>
-	<string name="launcher_name_test" translatable="false">CSBTE Mobile Test</string>
+	<string name="app_name" translatable="false">CSMoE</string>
+	<string name="launcher_name" translatable="false">CSMoE</string>
+	<string name="launcher_name_test" translatable="false">CSMoE Test</string>
 	<string name="version_string" translatable="false">Test</string>
 	
 	<!-- Generic -->
