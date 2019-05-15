@@ -17,3 +17,9 @@ local.properties
 
 # VKontakte gives a shit when uploading APK
 *.bin 
+
+# Android Studio
+build/
+.gradle/
+.idea/
+.cxx/
