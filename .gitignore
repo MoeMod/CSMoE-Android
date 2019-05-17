@@ -20,6 +20,8 @@ local.properties
 
 # Android Studio
 build/
+release/
 .gradle/
 .idea/
 .cxx/
+*.iml
