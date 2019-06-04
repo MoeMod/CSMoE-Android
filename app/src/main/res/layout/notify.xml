@@ -19,7 +19,7 @@
 		android:layout_alignParentTop="true"
 		android:singleLine="true"
 		android:layout_weight="90"
-		android:text="Xash3D"
+		android:text="CSMoE"
 		android:layout_gravity="center_vertical" />
 	<Button
 		android:id="@+id/status_exit_button"
