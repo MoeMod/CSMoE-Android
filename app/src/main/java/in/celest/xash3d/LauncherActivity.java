@@ -118,14 +118,6 @@ public class LauncherActivity extends Activity
 				startXash(v);
 			}
 		});
-		((Button)findViewById( R.id.button_shortcut )).setOnClickListener(new View.OnClickListener()
-		{
-			@Override
-			public void onClick(View v) 
-			{
-				createShortcut(v);
-			}
-		});
 		((Button)findViewById( R.id.button_about )).setOnClickListener(new View.OnClickListener()
 		{
 			@Override
