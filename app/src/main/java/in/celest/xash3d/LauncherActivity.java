@@ -118,14 +118,6 @@ public class LauncherActivity extends Activity
 				startXash(v);
 			}
 		});
-		((Button)findViewById( R.id.button_shortcut )).setOnClickListener(new View.OnClickListener()
-		{
-			@Override
-			public void onClick(View v) 
-			{
-				createShortcut(v);
-			}
-		});
 		((Button)findViewById( R.id.button_about )).setOnClickListener(new View.OnClickListener()
 		{
 			@Override
@@ -436,15 +428,6 @@ public class LauncherActivity extends Activity
 			break;
 		}
 		}
-	}
-
-	public void createShortcut(View view)
-	{
-		Intent intent = new Intent(this, ShortcutActivity.class);
-		intent.putExtra( "basedir", resPath.getText().toString() );
-		intent.putExtra( "name", "Xash3D" );
-		intent.putExtra( "argv", cmdArgs.getText().toString() );
-		startActivity(intent);
 	}
 
     @Override
