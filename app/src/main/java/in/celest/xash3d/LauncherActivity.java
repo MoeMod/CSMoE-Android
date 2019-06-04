@@ -430,15 +430,6 @@ public class LauncherActivity extends Activity
 		}
 	}
 
-	public void createShortcut(View view)
-	{
-		Intent intent = new Intent(this, ShortcutActivity.class);
-		intent.putExtra( "basedir", resPath.getText().toString() );
-		intent.putExtra( "name", "Xash3D" );
-		intent.putExtra( "argv", cmdArgs.getText().toString() );
-		startActivity(intent);
-	}
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
