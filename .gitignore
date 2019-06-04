@@ -21,6 +21,7 @@ local.properties
 # Android Studio
 build/
 release/
+debug/
 .gradle/
 .idea/
 .cxx/
