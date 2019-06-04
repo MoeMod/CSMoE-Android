@@ -100,7 +100,7 @@ public class XashService extends Service
 
 
 		notification.contentView = new RemoteViews(getApplicationContext().getPackageName(),  notify);
-		notification.contentView.setTextViewText(status_text, "Xash3D Engine");
+		notification.contentView.setTextViewText(status_text, "CSMoE");
 		notification.contentView.setOnClickPendingIntent(status_exit_button, pendingExitIntent);
 
 		notification.contentIntent = PendingIntent.getActivity(getApplicationContext(), 0, engineIntent, 0);
