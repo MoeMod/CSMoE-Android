@@ -33,38 +33,39 @@ import java.util.List;
 
 import in.celest.xash3d.csbtem.R;
 import su.xash.fwgslib.FWGSLib;
-
 public class FPicker extends Activity {
-    private File currentDir;
-    private FileArrayAdapter adapter;
-    static ListView delta;
-    public static final int sdk = Integer.valueOf(Build.VERSION.SDK);
-    static private Button mSelectBtn;
+	private File currentDir;
+	private FileArrayAdapter adapter;
+	static ListView delta;
+	public static final int sdk = Integer.valueOf(Build.VERSION.SDK);
+	static private Button mSelectBtn;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		setContentView( R.layout.activity_fpicker );
-		String path = FWGSLib.getExternalFilesDir(this);
+		String path = Environment.getExternalStorageDirectory().toString();
 		currentDir = new File( path );
 		mSelectBtn = ((Button)findViewById( R.id.button_fpicker_select ));
 		mSelectBtn.setOnClickListener(new View.OnClickListener()
 		{
 			@Override
-			public void onClick(View v) 
+			public void onClick(View v)
 			{
 				onFileClick(v);
 			}
 		});
-		fill(currentDir);
-    }
 
-    private void fill(File folder)
-    {
+
+		fill(currentDir);
+	}
+
+	private void fill(File folder)
+	{
 		mSelectBtn.setEnabled( false );
 		new Fill(folder).execute();
-    }
+	}
     
     private class Fill extends AsyncTask<Void, Void, List<Item>> 
     {
